@@ -80,7 +80,7 @@ export class ProductPageComponent  {
       if (productInCart) {
         productInCart.quantity += quantity;
       } else {
-        this.cartArray.push({ ...this.productDetails });
+        this.cartArray.push({...this.productDetails });
       }
       this.cartService.setCartArray(this.cartArray);
     }

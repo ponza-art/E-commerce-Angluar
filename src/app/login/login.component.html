@@ -1,54 +1,55 @@
-<form #loginform="ngForm"  (ngSubmit)="handleSubmitForm(loginform)">
-  <div class="card p-5 mx-auto "style="width:30vw" >
-    <div class="m-3">
-      <label for="exampleInputEmail1" class="form-label">Email address</label>
-      <input
-        type="email"
-        class="form-control"
-        id="exampleInputEmail1"
-        aria-describedby="emailHelp"
-        name="email"
-        ngModel
-        #email="ngModel"
-        pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"
-        required
-      />
-      @if(email.touched && email.invalid){
-      <div class="form-text text-danger">
-        @if(email?.hasError('required')){
-        <small>Required</small>
-        } @if(email?.hasError('pattern')){
-        <small>please enter correct email address</small>
-        }
+<form #loginform="ngForm" (ngSubmit)="handleSubmitForm(loginform)">
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8 col-lg-6">
+        <div class="card p-4">
+          <div class="card-body">
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Email address</label>
+              <input
+                type="email"
+                class="form-control"
+                id="exampleInputEmail1"
+                aria-describedby="emailHelp"
+                name="email"
+                ngModel
+                #email="ngModel"
+                pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"
+                required
+              />
+              <div *ngIf="email.touched && email.invalid" class="form-text text-danger">
+                <div *ngIf="email.hasError('required')">
+                  <small>Email is required.</small>
+                </div>
+                <div *ngIf="email.hasError('pattern')">
+                  <small>Please enter a correct email address.</small>
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="exampleInputPassword1"
+                name="password"
+                ngModel
+                #password="ngModel"
+                required
+              />
+              <div *ngIf="password.touched && password.invalid" class="form-text text-danger">
+                <div *ngIf="password.hasError('required')">
+                  <small>Password is required.</small>
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-outline-primary w-100 mb-3" [disabled]="loginform.invalid">Submit</button>
+            <p class="fs-6 mt-3 text-center">
+              Don't have an account? <a [routerLink]="['/Register']" routerLinkActive="router-link-active">Register</a>
+            </p>
+          </div>
+        </div>
       </div>
-      }
     </div>
-    <div class="m-3">
-      <label for="exampleInputPassword1" class="form-label">Password</label>
-      <input
-        type="password"
-        class="form-control"
-        id="exampleInputPassword1"
-        name="password"
-        ngModel
-        #password="ngModel"
-        required
-      />
-      @if(password.touched && password.invalid){
-      <div class="form-text text-danger">
-        @if(password.hasError('required')){
-        <small>Required</small>
-        }
-      </div>
-      }
-    </div>
-
-    <button type="submit" class="btn btn-outline-primary m-3">Submit</button>
-    <p class="fs-6 my-3 mx-auto fw-bold text-black text-c">
-      Don't Have Account Please
-      <a [routerLink]="['/Register']" routerLinkActive="router-link-active"
-        >Register</a
-      >
-    </p>
   </div>
 </form>
